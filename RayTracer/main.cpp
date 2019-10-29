@@ -56,11 +56,11 @@ int main( int argc, char *argv[] )
 			{
 				pixelPosition.x = x;
 
-				myRay = myCamera.generateRay(pixelPosition);
-				mySphere.intersection(myRay, glm::vec3(0.0f, 0.0f, -1.0f));
+				myRay = myCamera.generateRay(pixelPosition, windowSize);
+				mySphere.intersection(myRay);
 				bool inter = mySphere.getIntersection();
 
-				if (inter = true)
+				if (inter == true)
 				{
 					pixelColour = myTracer.traceRay(myRay);
 				}
@@ -70,15 +70,14 @@ int main( int argc, char *argv[] )
 				}
 
 				// Draw the pixel to the screen
-				MCG::DrawPixel(pixelPosition, pixelColour);
+				//MCG::DrawPixel(pixelPosition, pixelColour);
+				MCG::DrawPixel(myRay.origin, pixelColour);
 				MCG::ProcessFrame();
 			}
+			
 		}
-
-		// Change our pixel's X coordinate according to time
-		//pixelPosition.x = (windowSize.x / 2) + (int)(sin(timer) * 100.0f);
-		// Update our time variable
-		//timer += 1.0f / 60.0f;
+		
+		
 	}
 
 	return 0;

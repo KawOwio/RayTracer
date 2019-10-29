@@ -157,10 +157,10 @@ bool MCG::ProcessFrame()
 
 
 	// Limiter in case we're running really quick
-	if( deltaTs < ( 1.0f / 60.0f ) )	// not sure how accurate the SDL_Delay function is..
-	{
-		SDL_Delay( (unsigned int)( ( ( 1.0f / 60.0f ) - deltaTs )*1000.0f ) );
-	}
+//	if( deltaTs < ( 1.0f / 60.0f ) )	// not sure how accurate the SDL_Delay function is..
+//	{
+	//	SDL_Delay( (unsigned int)( ( ( 1.0f / 60.0f ) - deltaTs )*1000.0f ) );
+//	}
 
 
 	return true;

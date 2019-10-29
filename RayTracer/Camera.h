@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
@@ -7,9 +9,14 @@
 class Camera
 {
 private:
-	Ray myRay;
+	glm::vec4 nearPlane;
+	glm::vec4 farPlane;
+	glm::vec2 mapping;
+
+	glm::mat4 viewMatrix;			//To represent the camera's position and orientation
+	glm::mat4 projectionMatrix;		//To act like the camera's lens
 public:
-	Ray generateRay(glm::ivec2 _pixelCoordinates);
+	Ray generateRay(glm::ivec2 _pixelCoordinates, glm::ivec2 _windowSize);
 };
 
 #endif
