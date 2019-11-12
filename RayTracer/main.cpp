@@ -1,4 +1,5 @@
 #include <cmath>
+#include <iostream>
 
 #include "MCG_GFX_Lib.h"
 #include "Ray.h"
@@ -37,13 +38,18 @@ int main( int argc, char *argv[] )
 	//float timer = 0.0f;
 
 	//Creating objects
-	Camera myCamera;
+	Camera myCamera(glm::mat4(1), glm::perspective(0.7f, ((float)windowSize.x / (float)windowSize.y), 0.1f, 100.0f));
 	Tracer myTracer;
 	Ray myRay;
 	Sphere mySphere;
 
+	myTracer.objects.push_back(mySphere);
+
+	bool finished = false;
+
 	// This is our game loop
 	// It will run until the user presses 'escape' or closes the window
+	//while( finished == false )
 	while( MCG::ProcessFrame() )
 	{
 		// Set every pixel to the same colour
@@ -57,28 +63,21 @@ int main( int argc, char *argv[] )
 				pixelPosition.x = x;
 
 				myRay = myCamera.generateRay(pixelPosition, windowSize);
-				mySphere.intersection(myRay);
-				bool inter = mySphere.getIntersection();
-
-				if (inter == true)
-				{
-					pixelColour = myTracer.traceRay(myRay);
-				}
-				else
-				{
-					pixelColour = glm::ivec3(0, 0, 0);
-				}
+				pixelColour = myTracer.traceRay(myRay);
 
 				// Draw the pixel to the screen
 				//MCG::DrawPixel(pixelPosition, pixelColour);
-				MCG::DrawPixel(myRay.origin, pixelColour);
-				MCG::ProcessFrame();
+				MCG::DrawPixel(pixelPosition, pixelColour);
+				
 			}
 			
 		}
 		
-		
+		std::cout << "frame finished" << std::endl;
+		finished = true;
+		//MCG::ProcessFrame();
 	}
-
+	
+	system("pause");
 	return 0;
 }

@@ -36,6 +36,7 @@ intersectionReturn Sphere::intersection(Ray _myRay)
 			float x = glm::sqrt(glm::pow(radius, 2) - glm::pow(d, 2));
 			check.distance = temp - x;
 			check.intersection = true;
+			check.intersectionPoint = (a + (temp - X) * n);
 		}
 		else
 		{

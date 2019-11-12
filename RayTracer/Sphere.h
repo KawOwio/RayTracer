@@ -12,14 +12,15 @@ struct intersectionReturn
 {
 	float distance;
 	bool intersection;
+	glm::vec3 intersectionPoint;
 };
 
 class Sphere
 {
 private:
 	intersectionReturn check;
-	glm::vec3 centre = glm::vec3(320.0f, 240.0f, -200.0f);
-	float radius = 100.0f;
+	glm::vec3 centre = glm::vec3(0.0f, 0.0f, -200.0f);
+	float radius = 50.0f;
 public:
 	glm::ivec3 shadePixel(Ray _myRay, glm::vec3 _intersectionPoint);
 	intersectionReturn intersection(Ray _myRay);
