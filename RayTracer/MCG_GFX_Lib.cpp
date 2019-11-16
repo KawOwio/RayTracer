@@ -245,4 +245,3 @@ int MCG::ShowAndHold()
 	Cleanup();
 	return 0;
 }
-

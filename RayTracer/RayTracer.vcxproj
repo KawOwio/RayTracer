@@ -121,6 +121,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MCG_GFX_Lib.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -129,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="MCG_GFX_Lib.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Sphere.h" />
