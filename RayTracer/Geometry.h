@@ -23,6 +23,7 @@ private:
 
 public:
 	intersectionReturn intersection(Ray _myRay, Sphere _mySphere);
+	glm::vec3 sphereNormal(glm::vec3 _centre, glm::vec3 _samplePoint);
 };
 
 #endif // !_GEOMETRY_H_

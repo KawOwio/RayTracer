@@ -14,7 +14,7 @@ private:
 
 public:
 	Sphere(glm::vec3 _centre, float _radius);
-	glm::ivec3 shadePixel(Ray _myRay, glm::vec3 _intersectionPoint);
+	glm::vec3 shadePixel(Ray _myRay, glm::vec3 _intersectionPoint);
 
 	glm::vec3 getCentre();
 	float getRadius();

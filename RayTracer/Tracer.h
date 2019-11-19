@@ -12,7 +12,7 @@
 class Tracer
 {
 public:
-	glm::ivec3 traceRay(Ray _myRay);
+	glm::vec3 traceRay(Ray _myRay);
 	std::vector<Sphere> objects;
 };
 

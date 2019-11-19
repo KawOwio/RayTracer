@@ -33,7 +33,7 @@ intersectionReturn Geometry::intersection(Ray _myRay, Sphere _mySphere)
 			float x = glm::sqrt(glm::pow(radius, 2) - glm::pow(d, 2));
 			check.distance = dotProduct - x;
 			check.intersection = true;
-			check.intersectionPoint = (a + (dotProduct - X) * n);
+			check.intersectionPoint = (a + (dotProduct - x) * n);
 		}
 		else
 		{
@@ -43,4 +43,14 @@ intersectionReturn Geometry::intersection(Ray _myRay, Sphere _mySphere)
 
 		return check;
 	}
+
+}
+
+glm::vec3 Geometry::sphereNormal(glm::vec3 _centre, glm::vec3 _samplePoint)
+{
+	glm::vec3 directionVector;
+
+	directionVector = glm::normalize(_samplePoint - _centre);
+
+	return directionVector;
 }

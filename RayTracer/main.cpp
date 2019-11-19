@@ -23,13 +23,13 @@ int main( int argc, char *argv[] )
 	MCG::SetBackground( glm::ivec3(0,0,0) );
 
 	glm::ivec2 pixelPosition;
-	glm::ivec3 pixelColour;
+	glm::vec3 pixelColour;
 
 	//Creating objects
 	Camera myCamera(glm::mat4(1), glm::perspective(0.7f, ((float)windowSize.x / (float)windowSize.y), 0.1f, 100.0f));
 	Tracer myTracer;
 	Ray myRay;
-	Sphere mySphere(glm::vec3(0.0f, 0.0f, -200.0f), 27.5f);
+	Sphere mySphere(glm::vec3(0.0f, 0.0f, -200.0f), 50.0f);
 	//Sphere mySphere2(glm::vec3(10.0f, 15.0f, -200.0f), 35.5f);
 
 	myTracer.objects.push_back(mySphere);
@@ -53,12 +53,12 @@ int main( int argc, char *argv[] )
 				pixelColour = myTracer.traceRay(myRay);
 
 				// Draw the pixel to the screen		
-				MCG::DrawPixel(pixelPosition, pixelColour);
-
+				MCG::DrawPixel(pixelPosition, pixelColour * 255.0f);
+				
 			}
 			MCG::ProcessFrame();
 		}
-
+		
 		//std::cout << "frame finished" << std::endl;
 		finished = true;
 	}
