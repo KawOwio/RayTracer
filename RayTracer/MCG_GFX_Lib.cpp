@@ -85,7 +85,7 @@ void MCG::SetBackground( glm::ivec3 colour )
 
 }
 
-void MCG::DrawPixel( glm::ivec2 position, glm::ivec3 colour )
+void MCG::DrawPixel( glm::ivec2 position, glm::vec3 colour )
 {
 	// Set the colour for drawing
 	SDL_SetRenderDrawColor( _renderer, colour.r, colour.g, colour.b, 255 );

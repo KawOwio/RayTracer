@@ -13,7 +13,6 @@ intersectionReturn Geometry::intersection(Ray _myRay, Sphere _mySphere)
 	glm::vec3 P = _mySphere.getCentre();
 	glm::vec3 Pa = P - a;
 	glm::vec3 n = rayDirection;
-	glm::vec3 X;
 
 	float radius = _mySphere.getRadius();
 

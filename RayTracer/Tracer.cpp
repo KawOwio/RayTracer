@@ -13,7 +13,6 @@ glm::vec3 Tracer::traceRay(Ray _myRay)
 		{
 			glm::vec3 colour = objects[0].shadePixel(_myRay, myResult.intersectionPoint);
 			return colour;
-			//return glm::ivec3(255, 0, 0);
 		}
 		else
 		{
