@@ -1,26 +1,52 @@
-#include "Geometry.h"
 #include "Sphere.h"
+#include "Geometry.h"
 
-Sphere::Sphere(glm::vec3 _centre, float _radius)
+Sphere::Sphere()
+{
+
+}
+
+void Sphere::initialise(glm::vec3 _centre, float _radius, float _reflectivity)
 {
 	centre = _centre;
 	radius = _radius;
+	reflectivity = _reflectivity;
 }
 
 glm::vec3 Sphere::shadePixel(Ray _myRay, glm::vec3 _intersectionPoint)
 {
 	Geometry geometry;
 
-	glm::vec3 lightPos = glm::vec3(200.0f, -200.0f, 200.0f);
-
 	glm::vec3 lightDirection = glm::normalize(-(_intersectionPoint)+lightPos);
+	glm::vec3 H = (temp + lightPos) / glm::length(temp + lightPos);
 
-	glm::vec3 lightColour = glm::vec3(1.0f, 1.0f, 1.0f);
-	glm::vec3 diffuseColour = glm::vec3(1.0f, 0.62f, 0.44f);
-	//glm::vec3 diffuseColour = glm::vec3(0.64f, 1.0f, 0.64f);
-	glm::vec3 normal = geometry.sphereNormal(centre, _intersectionPoint);
+	surfaceNormal = geometry.sphereNormal(centre, _intersectionPoint);
 
-	glm::vec3 colour = glm::max(glm::dot(lightDirection, normal), 0.0f) * lightColour * diffuseColour;
+	if (glm::dot(lightDirection, surfaceNormal) > 0)
+	{
+		facing = 1.0f;
+	}
+	else
+	{
+		facing = 0.0f;
+	}
+	
+	if (reflectivity > 0.0f)
+	{
+		glm::vec3 reflectionRayDirection = glm::reflect(_intersectionPoint, surfaceNormal);
+		//glm::vec3 reflectionRayDirection = -_intersectionPoint - 2.0f * surfaceNormal * glm::dot(-_intersectionPoint, surfaceNormal);
+		_myRay.origin = _intersectionPoint;
+		_myRay.direction = reflectionRayDirection;
+
+		glm::vec3 colour = glm::vec3(1.0f, 1.0f, 1.0f);
+		return colour * specularColour;
+	}
+	
+
+	glm::vec3 diffusive = (glm::max(glm::dot(lightDirection, surfaceNormal), 0.0f) * lightColour * diffuseColour);
+	glm::vec3 specular = (glm::pow(glm::max(glm::dot(H, surfaceNormal), 0.0f), shinines) * lightColour * specularColour * facing);
+
+	glm::vec3 colour = glm::min((diffusive + specular), 1.0f);	
 
 	return colour;
 }
@@ -33,4 +59,9 @@ glm::vec3 Sphere::getCentre()
 float Sphere::getRadius()
 {
 	return radius;
+}
+
+float Sphere::getReflectivity()
+{
+	return reflectivity;
 }

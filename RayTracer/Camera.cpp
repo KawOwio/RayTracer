@@ -1,6 +1,17 @@
 #include "Camera.h"
 
+Camera::Camera()
+{
+
+}
+
 Camera::Camera(glm::mat4 _view, glm::mat4 _projection)
+{
+	viewMatrix = _view;
+	projectionMatrix = _projection;
+}
+
+void Camera::initialise(glm::mat4 _view, glm::mat4 _projection)
 {
 	viewMatrix = _view;
 	projectionMatrix = _projection;
@@ -35,10 +46,10 @@ Ray Camera::generateRay(glm::ivec2 _pixelCoordinates, glm::ivec2 _windowSize)
 	myRay.direction = direction;
 
 	//Check if a ray is in front of the camera
-	//if (myRay.direction.z >= 0.0f)
-	//{
-	//	myRay.direction.z = myRay.direction.z;
-	//}
+	if (myRay.direction.z >= 0.0f)
+	{
+		myRay.direction.z = myRay.direction.z;
+	}
 
 	return myRay;
 }

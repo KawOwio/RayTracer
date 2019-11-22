@@ -125,6 +125,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MCG_GFX_Lib.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Tracer.cpp" />
   </ItemGroup>
@@ -133,6 +134,7 @@
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="MCG_GFX_Lib.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Tracer.h" />
   </ItemGroup>

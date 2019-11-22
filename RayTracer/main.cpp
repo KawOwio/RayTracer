@@ -4,27 +4,17 @@
 #include <thread>
 #include <mutex>
 
-#include "MCG_GFX_Lib.h"
-#include "Ray.h"
-#include "Camera.h"
-#include "Tracer.h"
-#include "Sphere.h"
+#include "Scene.h"
 
-glm::ivec2 windowSize(640, 480);
 std::mutex mtx;
-int threads = 1;
+int threads = 4;	//2.3 sec
 
-void t1(int _split)
+void t1(int _split, Scene _myScene)
 {
 	glm::ivec2 pixelPosition;
 	glm::vec3 pixelColour;
 
-	Camera myCamera(glm::mat4(1), glm::perspective(0.7f, ((float)windowSize.x / (float)windowSize.y), 0.1f, 100.0f));
-	Tracer myTracer;
-	Ray myRay;
-	Sphere mySphere(glm::vec3(0.0f, 0.0f, -100.0f), 25.0f);
-
-	myTracer.objects.push_back(mySphere);
+	glm::ivec2 windowSize = _myScene.getWindowSize();
 
 	for (int y = (windowSize.y / threads * (_split - 1)); y < windowSize.y / threads * _split; y++)
 	{
@@ -34,9 +24,23 @@ void t1(int _split)
 		{
 			pixelPosition.x = x;
 
-			myRay = myCamera.generateRay(pixelPosition, windowSize);
-			pixelColour = myTracer.traceRay(myRay);
+			_myScene.myRay = _myScene.myCamera.generateRay(pixelPosition, windowSize);
+			_myScene.intersectionResult = _myScene.geometry.intersection(_myScene.myRay, _myScene.myTracer.objects[0]);
 
+			pixelColour = _myScene.myTracer.traceRay(_myScene.myRay);
+
+			//if (_myScene.myTracer.objects[0].getReflectivity() > 0)
+			//{
+			//	//_myScene.myRay = _myScene.myCamera.generateRay(_myScene.intersectionResult.intersectionPoint, windowSize);
+			//	_myScene.myRay.origin = _myScene.intersectionResult.intersectionPoint;
+			//	_myScene.myRay.direction = glm::reflect(_myScene.intersectionResult.intersectionPoint, _myScene.geometry.sphereNormal(_myScene.myTracer.objects[0].getCentre(), _myScene.intersectionResult.intersectionPoint));
+			//	pixelColour = _myScene.myTracer.traceRay(_myScene.myRay);
+			//}
+			//else
+			//{
+			//	pixelColour = _myScene.myTracer.traceRay(_myScene.myRay);
+			//}
+			
 			// Draw the pixel to the screen		
 			mtx.lock();
 			MCG::DrawPixel(pixelPosition, pixelColour * 255.0f);
@@ -50,8 +54,11 @@ void t1(int _split)
 
 int main( int argc, char *argv[] )
 {
+	Scene myScene;
+	myScene.initialise(glm::ivec2(640, 480));
+
 	//Initialising and creating a window
-	if( !MCG::Init( windowSize ) )
+	if( !MCG::Init( myScene.getWindowSize() ) )
 	{
 		// We must check if something went wrong
 		return -1;
@@ -59,13 +66,6 @@ int main( int argc, char *argv[] )
 
 	// Sets every pixel to the same colour
 	MCG::SetBackground( glm::ivec3(0,0,0) );
-
-	//glm::ivec2 pixelPosition;
-	//glm::vec3 pixelColour;
-
-	//Creating objects
-
-
 
 	bool finished = false;
 
@@ -77,7 +77,7 @@ int main( int argc, char *argv[] )
 		for (int split = 1; split <= threads; split++)
 		{
 			//create threads
-			t.push_back(new std::thread(t1, split));
+			t.push_back(new std::thread(t1, split, myScene));
 		}
 		for (int i = 0; i < t.size(); i++)
 		{
