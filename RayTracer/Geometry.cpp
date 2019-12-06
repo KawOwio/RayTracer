@@ -19,9 +19,11 @@ intersectionReturn Geometry::intersection(Ray _myRay, Sphere _mySphere)
 	dotProduct = (glm::dot(Pa, n));
 	d = glm::length(Pa - (dotProduct * n));
 	
+	//check if ray is inside of the sphere
 	if (glm::length(P - a) <= radius || dotProduct <= 0)
 	{
-		check.distance = 0.0f;
+		check.distance = 9999999.9f;
+		_mySphere.distanceFromCamera = check.distance;
 		check.intersection = false;
 		return check;
 	}
@@ -31,12 +33,14 @@ intersectionReturn Geometry::intersection(Ray _myRay, Sphere _mySphere)
 		{
 			float x = glm::sqrt(glm::pow(radius, 2) - glm::pow(d, 2));
 			check.distance = dotProduct - x;
+			_mySphere.distanceFromCamera = check.distance;
 			check.intersection = true;
 			check.intersectionPoint = (a + (dotProduct - x) * n);
 		}
 		else
 		{
-			check.distance = 0.0f;
+			check.distance = 99999999.9f;
+			_mySphere.distanceFromCamera = check.distance;
 			check.intersection = false;
 		}
 

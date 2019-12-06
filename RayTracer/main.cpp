@@ -7,7 +7,7 @@
 #include "Scene.h"
 
 std::mutex mtx;
-int threads = 4;	//2.3 sec
+int threads = 8;	//2.3 sec
 
 void t1(int _split, Scene _myScene)
 {
@@ -26,8 +26,9 @@ void t1(int _split, Scene _myScene)
 			pixelPosition.x = x;
 
 			_myScene.myRay = _myScene.myCamera.generateRay(pixelPosition, windowSize);
-			_myScene.intersectionResult = _myScene.geometry.intersection(_myScene.myRay, _myScene.myTracer.objects[0]);
 
+			
+			_myScene.intersectionResult = _myScene.geometry.intersection(_myScene.myRay, _myScene.myTracer.objects[0]);
 			if (_myScene.mySphere.getReflectivity() > 0 && _myScene.intersectionResult.intersection == true)
 			{
 				glm::vec3 surfaceNormal = _myScene.geometry.sphereNormal(_myScene.mySphere.getCentre(), _myScene.intersectionResult.intersectionPoint);
@@ -50,6 +51,7 @@ void t1(int _split, Scene _myScene)
 			{
 				reflectedColour = glm::vec3(0.0f, 0.0f, 0.0f);
 			}
+			
 
 			pixelColour = _myScene.myTracer.traceRay(_myScene.myRay);
 
@@ -79,7 +81,7 @@ int main( int argc, char *argv[] )
 	}
 
 	// Sets every pixel to the same colour
-	MCG::SetBackground( glm::ivec3(0,0,0) );
+	//MCG::SetBackground( glm::ivec3(0,0,0) );
 
 	bool finished = false;
 

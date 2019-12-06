@@ -10,11 +10,11 @@ class Sphere
 private:
 	glm::vec3 centre;
 	glm::vec3 surfaceNormal;
-	glm::vec3 lightPos = glm::vec3(0.0f, -200.0f, 200.0f);
+	glm::vec3 lightPos = glm::vec3(0.0f, -20.0f, 20.0f);
 	glm::vec3 lightColour = glm::vec3(1.0f, 1.0f, 1.0f);
 	glm::vec3 diffuseColour = glm::vec3(1.0f, 0.62f, 0.44f);
 	glm::vec3 specularColour = glm::vec3(0.5f, 0.5f, 0.5f);
-	glm::vec3 temp = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::vec3 worldOrigin = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	float shinines = 100.0f;
 	float reflectivity;
@@ -32,6 +32,8 @@ public:
 
 	void setDiffuse(glm::vec3 _diffuse);
 	void setSpecular(glm::vec3 _specular);
+
+	float distanceFromCamera;
 };
 
 #endif

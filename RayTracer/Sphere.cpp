@@ -18,7 +18,7 @@ glm::vec3 Sphere::shadePixel(Ray _myRay, glm::vec3 _intersectionPoint)
 	Geometry geometry;
 
 	glm::vec3 lightDirection = glm::normalize(-(_intersectionPoint)+lightPos);
-	glm::vec3 H = (temp + lightPos) / glm::length(temp + lightPos);
+	glm::vec3 H = (worldOrigin + lightPos) / glm::length(worldOrigin + lightPos);
 
 	surfaceNormal = geometry.sphereNormal(centre, _intersectionPoint);
 
