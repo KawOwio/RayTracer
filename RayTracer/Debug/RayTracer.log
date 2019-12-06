@@ -1,11 +1,3 @@
-﻿  Camera.cpp
-  Geometry.cpp
-  main.cpp
-d:\users\nikita\desktop\uni\final year\gcp\raytracer\raytracer\main.cpp(82): warning C4018: '<': signed/unsigned mismatch
-  Ray.cpp
-  Scene.cpp
-  Sphere.cpp
-  Tracer.cpp
-d:\users\nikita\desktop\uni\final year\gcp\raytracer\raytracer\tracer.cpp(8): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  main.cpp
+d:\users\nikita\desktop\uni\final year\gcp\raytracer\raytracer\main.cpp(96): warning C4018: '<': signed/unsigned mismatch
   RayTracer.vcxproj -> D:\Users\Nikita\Desktop\Uni\Final Year\GCP\RayTracer\Debug\RayTracer.exe

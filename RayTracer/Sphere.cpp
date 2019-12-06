@@ -31,16 +31,16 @@ glm::vec3 Sphere::shadePixel(Ray _myRay, glm::vec3 _intersectionPoint)
 		facing = 0.0f;
 	}
 	
-	if (reflectivity > 0.0f)
-	{
-		glm::vec3 reflectionRayDirection = glm::reflect(_intersectionPoint, surfaceNormal);
-		//glm::vec3 reflectionRayDirection = -_intersectionPoint - 2.0f * surfaceNormal * glm::dot(-_intersectionPoint, surfaceNormal);
-		_myRay.origin = _intersectionPoint;
-		_myRay.direction = reflectionRayDirection;
+	//if (reflectivity > 0.0f)
+	//{
+	//	glm::vec3 reflectionRayDirection = glm::reflect(_intersectionPoint, surfaceNormal);
+	//	//glm::vec3 reflectionRayDirection = -_intersectionPoint - 2.0f * surfaceNormal * glm::dot(-_intersectionPoint, surfaceNormal);
+	//	_myRay.origin = _intersectionPoint;
+	//	_myRay.direction = reflectionRayDirection;
 
-		glm::vec3 colour = glm::vec3(1.0f, 1.0f, 1.0f);
-		return colour * specularColour;
-	}
+	//	glm::vec3 colour = glm::vec3(1.0f, 1.0f, 1.0f);
+	//	return colour * specularColour;
+	//}
 	
 
 	glm::vec3 diffusive = (glm::max(glm::dot(lightDirection, surfaceNormal), 0.0f) * lightColour * diffuseColour);
@@ -64,4 +64,14 @@ float Sphere::getRadius()
 float Sphere::getReflectivity()
 {
 	return reflectivity;
+}
+
+void Sphere::setDiffuse(glm::vec3 _diffuse)
+{
+	diffuseColour = _diffuse;
+}
+
+void Sphere::setSpecular(glm::vec3 _specular)
+{
+	specularColour = _specular;
 }

@@ -29,6 +29,9 @@ public:
 	glm::vec3 getCentre();
 	float getRadius();
 	float getReflectivity();
+
+	void setDiffuse(glm::vec3 _diffuse);
+	void setSpecular(glm::vec3 _specular);
 };
 
 #endif

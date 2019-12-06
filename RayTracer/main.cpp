@@ -13,6 +13,7 @@ void t1(int _split, Scene _myScene)
 {
 	glm::ivec2 pixelPosition;
 	glm::vec3 pixelColour;
+	glm::vec3 reflectedColour;
 
 	glm::ivec2 windowSize = _myScene.getWindowSize();
 
@@ -27,19 +28,32 @@ void t1(int _split, Scene _myScene)
 			_myScene.myRay = _myScene.myCamera.generateRay(pixelPosition, windowSize);
 			_myScene.intersectionResult = _myScene.geometry.intersection(_myScene.myRay, _myScene.myTracer.objects[0]);
 
+			if (_myScene.mySphere.getReflectivity() > 0 && _myScene.intersectionResult.intersection == true)
+			{
+				glm::vec3 surfaceNormal = _myScene.geometry.sphereNormal(_myScene.mySphere.getCentre(), _myScene.intersectionResult.intersectionPoint);
+				_myScene.myReflectionRay.direction = glm::reflect(_myScene.intersectionResult.intersectionPoint, surfaceNormal);
+				_myScene.myReflectionRay.origin = surfaceNormal + (_myScene.myReflectionRay.direction * (float)DBL_EPSILON);
+
+				_myScene.intersectionResult = _myScene.geometry.intersection(_myScene.myReflectionRay, _myScene.myTracer.objects[1]);
+
+				if (_myScene.intersectionResult.intersection == true)
+				{
+					reflectedColour = _myScene.myTracer.traceRay(_myScene.myReflectionRay);
+				}
+				else
+				{
+					reflectedColour = glm::vec3(0.01f, 0.01f, 0.1f);
+				}
+				
+			}
+			else
+			{
+				reflectedColour = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
+
 			pixelColour = _myScene.myTracer.traceRay(_myScene.myRay);
 
-			//if (_myScene.myTracer.objects[0].getReflectivity() > 0)
-			//{
-			//	//_myScene.myRay = _myScene.myCamera.generateRay(_myScene.intersectionResult.intersectionPoint, windowSize);
-			//	_myScene.myRay.origin = _myScene.intersectionResult.intersectionPoint;
-			//	_myScene.myRay.direction = glm::reflect(_myScene.intersectionResult.intersectionPoint, _myScene.geometry.sphereNormal(_myScene.myTracer.objects[0].getCentre(), _myScene.intersectionResult.intersectionPoint));
-			//	pixelColour = _myScene.myTracer.traceRay(_myScene.myRay);
-			//}
-			//else
-			//{
-			//	pixelColour = _myScene.myTracer.traceRay(_myScene.myRay);
-			//}
+			pixelColour = glm::min((pixelColour + reflectedColour), 1.0f);
 			
 			// Draw the pixel to the screen		
 			mtx.lock();

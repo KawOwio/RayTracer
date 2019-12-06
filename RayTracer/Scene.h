@@ -19,6 +19,7 @@ public:
 	Camera myCamera;
 	Tracer myTracer;
 	Ray myRay;
+	Ray myReflectionRay;
 	Sphere mySphere;
 	Sphere mySphere2;
 

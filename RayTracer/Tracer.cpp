@@ -14,8 +14,8 @@ glm::vec3 Tracer::traceRay(Ray _myRay)
 			glm::vec3 colour = objects[o].shadePixel(_myRay, myResult.intersectionPoint);
 			return colour;
 		}
-		
 	}
+
 	//Background colour
 	return glm::vec3(0.01f, 0.01f, 0.1f);
 }
