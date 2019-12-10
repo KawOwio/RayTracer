@@ -20,7 +20,7 @@ void t1(int _split, Scene _myScene)
 	for (int y = (windowSize.y / threads * (_split - 1)); y < windowSize.y / threads * _split; y++)
 	{
 		pixelPosition.y = y;
-
+		
 		for (int x = 0; x < windowSize.x; x++)
 		{
 			pixelPosition.x = x;
@@ -32,14 +32,14 @@ void t1(int _split, Scene _myScene)
 			if (_myScene.mySphere.getReflectivity() > 0 && _myScene.intersectionResult.intersection == true)
 			{
 				glm::vec3 surfaceNormal = _myScene.geometry.sphereNormal(_myScene.mySphere.getCentre(), _myScene.intersectionResult.intersectionPoint);
-				_myScene.myReflectionRay.direction = glm::reflect(_myScene.intersectionResult.intersectionPoint, surfaceNormal);
-				_myScene.myReflectionRay.origin = surfaceNormal + (_myScene.myReflectionRay.direction * (float)DBL_EPSILON);
-
+				_myScene.myReflectionRay.direction = glm::reflect(_myScene.myRay.direction, surfaceNormal);
+				_myScene.myReflectionRay.origin = _myScene.intersectionResult.intersectionPoint;
+				
 				_myScene.intersectionResult = _myScene.geometry.intersection(_myScene.myReflectionRay, _myScene.myTracer.objects[1]);
 
 				if (_myScene.intersectionResult.intersection == true)
 				{
-					reflectedColour = _myScene.myTracer.traceRay(_myScene.myReflectionRay);
+					reflectedColour = _myScene.myTracer.traceRay(_myScene.myReflectionRay) * _myScene.mySphere.getReflectivity();
 				}
 				else
 				{
@@ -52,11 +52,16 @@ void t1(int _split, Scene _myScene)
 				reflectedColour = glm::vec3(0.0f, 0.0f, 0.0f);
 			}
 			
+			if (pixelPosition == glm::ivec2(270, 235))
+			{
+				std::cout << "test";
+			}
 
 			pixelColour = _myScene.myTracer.traceRay(_myScene.myRay);
-
 			pixelColour = glm::min((pixelColour + reflectedColour), 1.0f);
 			
+
+
 			// Draw the pixel to the screen		
 			mtx.lock();
 			MCG::DrawPixel(pixelPosition, pixelColour * 255.0f);

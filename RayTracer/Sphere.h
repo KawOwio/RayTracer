@@ -10,6 +10,7 @@ class Sphere
 private:
 	glm::vec3 centre;
 	glm::vec3 surfaceNormal;
+	//glm::vec3 lightPos = glm::vec3(0.0f, -20.0f, 20.0f);
 	glm::vec3 lightPos = glm::vec3(0.0f, -20.0f, 20.0f);
 	glm::vec3 lightColour = glm::vec3(1.0f, 1.0f, 1.0f);
 	glm::vec3 diffuseColour = glm::vec3(1.0f, 0.62f, 0.44f);

@@ -34,7 +34,7 @@ glm::vec3 Sphere::shadePixel(Ray _myRay, glm::vec3 _intersectionPoint)
 	//if (reflectivity > 0.0f)
 	//{
 	//	glm::vec3 reflectionRayDirection = glm::reflect(_intersectionPoint, surfaceNormal);
-	//	//glm::vec3 reflectionRayDirection = -_intersectionPoint - 2.0f * surfaceNormal * glm::dot(-_intersectionPoint, surfaceNormal);
+	//	//glm::vec3 reflectionRayDirection = _intersectionPoint - 2.0f * surfaceNormal * glm::dot(surfaceNormal, _intersectionPoint);
 	//	_myRay.origin = _intersectionPoint;
 	//	_myRay.direction = reflectionRayDirection;
 
