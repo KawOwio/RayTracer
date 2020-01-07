@@ -1,2 +1,4 @@
-﻿  Scene.cpp
-  RayTracer.vcxproj -> C:\Users\s5065617\source\repos\RayTracer\Debug\RayTracer.exe
+﻿  Tracer.cpp
+d:\users\nikita\desktop\uni\final year\gcp\raytracer\raytracer\tracer.cpp(12): warning C4018: '<': signed/unsigned mismatch
+d:\users\nikita\desktop\uni\final year\gcp\raytracer\raytracer\tracer.cpp(27): warning C4018: '<=': signed/unsigned mismatch
+  RayTracer.vcxproj -> D:\Users\Nikita\Desktop\Uni\Final Year\GCP\RayTracer\Debug\RayTracer.exe

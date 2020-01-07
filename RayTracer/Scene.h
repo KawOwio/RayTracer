@@ -9,25 +9,27 @@
 #include "Sphere.h"
 #include "Geometry.h"
 
+//Class which initialises all other classes
+//Made for easy passing variables across functions
 class Scene
 {
 public:
-	Scene();
-
 	Geometry geometry;
 	intersectionReturn intersectionResult;
+	intersectionReturn tempResult;	//temporary solution for reflections
 	Camera myCamera;
 	Tracer myTracer;
 	Ray myRay;
 	Ray myReflectionRay;
 	Sphere mySphere;
 	Sphere mySphere2;
+	Sphere mySphere3;
 
-	void initialise(glm::ivec2 _windowSize);
-	glm::ivec2 getWindowSize();
+	void initialise(glm::vec2 _windowSize);
+	glm::vec2 getWindowSize();
 
 private:
-	glm::ivec2 windowSize;
+	glm::vec2 windowSize;
 };
 
 #endif // !_SCENE_H_

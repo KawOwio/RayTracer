@@ -14,11 +14,10 @@ private:
 
 	glm::mat4 viewMatrix;			//To represent the camera's position and orientation
 	glm::mat4 projectionMatrix;		//To act like the camera's lens
-public:
-	Camera();
-	Camera(glm::mat4 _view, glm::mat4 _projection);
+
+public:	
 	void initialise(glm::mat4 _view, glm::mat4 _projection);
-	Ray generateRay(glm::ivec2 _pixelCoordinates, glm::ivec2 _windowSize);
+	Ray generateRay(glm::vec2 _pixelCoordinates, glm::vec2 _windowSize);
 };
 
 #endif

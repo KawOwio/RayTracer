@@ -10,11 +10,10 @@ class Sphere
 private:
 	glm::vec3 centre;
 	glm::vec3 surfaceNormal;
-	//glm::vec3 lightPos = glm::vec3(0.0f, -20.0f, 20.0f);
 	glm::vec3 lightPos = glm::vec3(0.0f, -20.0f, 20.0f);
 	glm::vec3 lightColour = glm::vec3(1.0f, 1.0f, 1.0f);
-	glm::vec3 diffuseColour = glm::vec3(1.0f, 0.62f, 0.44f);
-	glm::vec3 specularColour = glm::vec3(0.5f, 0.5f, 0.5f);
+	glm::vec3 diffuseColour = glm::vec3(1.0f, 0.0f, 0.0f);
+	glm::vec3 specularColour = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 worldOrigin = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	float shinines = 100.0f;
@@ -23,7 +22,6 @@ private:
 	float radius;
 
 public:
-	Sphere();
 	void initialise(glm::vec3 _centre, float _radius, float _reflectivity);
 	glm::vec3 shadePixel(Ray _myRay, glm::vec3 _intersectionPoint);
 

@@ -5,14 +5,10 @@ intersectionReturn Geometry::intersection(Ray _myRay, Sphere _mySphere)
 	float d;
 	float dotProduct;
 	
-	glm::vec3 rayOrigin = _myRay.origin;
-	glm::vec3 rayDirection = _myRay.direction;
-	glm::vec3 worldOrigin = glm::vec3(0.0f, 0.0f, 0.0f);
-
-	glm::vec3 a = rayOrigin;
-	glm::vec3 P = _mySphere.getCentre();
-	glm::vec3 Pa = P - a;
-	glm::vec3 n = rayDirection;
+	glm::vec3 a = _myRay.origin;	//ray origin
+	glm::vec3 P = _mySphere.getCentre();	//sphere centre
+	glm::vec3 Pa = P - a;	//p minus a
+	glm::vec3 n = _myRay.direction;	//ray direction
 
 	float radius = _mySphere.getRadius();
 

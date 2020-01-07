@@ -6,7 +6,7 @@ glm::vec3 Tracer::traceRay(Ray _myRay)
 	intersectionReturn myIntersection;
 	Geometry geometry;
 
-	int objectId = 999999999;
+	int objectId = -1;
 	myIntersection.distance = 999999.9f;
 
 	for (int o = 0; o < objects.size(); o++)
@@ -23,12 +23,15 @@ glm::vec3 Tracer::traceRay(Ray _myRay)
 		}
 	}
 
-	if (objectId == 0 || objectId == 1)
+	//Check if objectId is in range from 0 to the amoubnt of spheres (3 in submited variant)
+	bool inRange = objectId <= objects.size();
+
+	if (inRange)
 	{
 		glm::vec3 colour = objects[objectId].shadePixel(_myRay, myIntersection.intersectionPoint);
 		return colour;
 	}
 	
 	//Background colour
-	return glm::vec3(0.01f, 0.01f, 0.1f);
+	return glm::vec3(0.0f, 0.0f, 0.0f);
 }

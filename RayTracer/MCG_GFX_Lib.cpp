@@ -10,12 +10,12 @@ namespace MCG
 {
 	SDL_Renderer *_renderer;
 	SDL_Window *_window;
-	glm::ivec2 _winSize;
+	glm::vec2 _winSize;
 	unsigned int _lastTime;
 }
 
 
-bool MCG::Init( glm::ivec2 windowSize )
+bool MCG::Init( glm::vec2 windowSize )
 {
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
@@ -30,10 +30,10 @@ bool MCG::Init( glm::ivec2 windowSize )
 	// You can experiment with the numbers to see what they do
 	int winPosX = 100;
 	int winPosY = 100;
-	_window = SDL_CreateWindow( "MCG GFX Framework",  // The first parameter is the window title
+	_window = SDL_CreateWindow( "Ray Tracer - Nikita Gribuska",  // The first parameter is the window title
 		winPosX, winPosY,
 		_winSize.x, _winSize.y,
-		SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE );
+		SDL_WINDOW_SHOWN);
 	// The last parameter lets us specify a number of options
 	// Here, we tell SDL that we want the window to be shown and that it can be resized
 	// You can learn more about SDL_CreateWindow here: https://wiki.libsdl.org/SDL_CreateWindow?highlight=%28\bCategoryVideo\b%29|%28CategoryEnum%29|%28CategoryStruct%29
@@ -76,7 +76,7 @@ bool MCG::Init( glm::ivec2 windowSize )
 	return true;
 }
 
-void MCG::SetBackground( glm::ivec3 colour )
+void MCG::SetBackground( glm::vec3 colour )
 {
 	// Set the colour for drawing
 	SDL_SetRenderDrawColor( _renderer, colour.r, colour.g, colour.b, 255 );
@@ -85,14 +85,13 @@ void MCG::SetBackground( glm::ivec3 colour )
 
 }
 
-void MCG::DrawPixel( glm::ivec2 position, glm::vec3 colour )
+void MCG::DrawPixel( glm::vec2 position, glm::vec3 colour )
 {
 	// Set the colour for drawing
 	SDL_SetRenderDrawColor( _renderer, colour.r, colour.g, colour.b, 255 );
 	// Draw our pixel
 	SDL_RenderDrawPoint( _renderer, position.x, position.y );
 }
-
 
 bool MCG::ProcessFrame()
 {
@@ -172,7 +171,6 @@ void MCG::Cleanup()
 	SDL_DestroyWindow( _window );
 	SDL_Quit();
 }
-
 
 int MCG::ShowAndHold()
 {

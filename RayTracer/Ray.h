@@ -6,14 +6,9 @@
 
 class Ray
 {
-private:
-
 public:
 	glm::vec3 origin;
 	glm::vec3 direction;
-
-	Ray();
-	//Ray(glm::vec3 _origin, glm::vec3 _direction);
 };
 
 #endif

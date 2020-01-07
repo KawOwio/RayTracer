@@ -1,11 +1,6 @@
 #include "Sphere.h"
 #include "Geometry.h"
 
-Sphere::Sphere()
-{
-
-}
-
 void Sphere::initialise(glm::vec3 _centre, float _radius, float _reflectivity)
 {
 	centre = _centre;
@@ -31,18 +26,6 @@ glm::vec3 Sphere::shadePixel(Ray _myRay, glm::vec3 _intersectionPoint)
 		facing = 0.0f;
 	}
 	
-	//if (reflectivity > 0.0f)
-	//{
-	//	glm::vec3 reflectionRayDirection = glm::reflect(_intersectionPoint, surfaceNormal);
-	//	//glm::vec3 reflectionRayDirection = _intersectionPoint - 2.0f * surfaceNormal * glm::dot(surfaceNormal, _intersectionPoint);
-	//	_myRay.origin = _intersectionPoint;
-	//	_myRay.direction = reflectionRayDirection;
-
-	//	glm::vec3 colour = glm::vec3(1.0f, 1.0f, 1.0f);
-	//	return colour * specularColour;
-	//}
-	
-
 	glm::vec3 diffusive = (glm::max(glm::dot(lightDirection, surfaceNormal), 0.0f) * lightColour * diffuseColour);
 	glm::vec3 specular = (glm::pow(glm::max(glm::dot(H, surfaceNormal), 0.0f), shinines) * lightColour * specularColour * facing);
 
